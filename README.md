@@ -4,10 +4,11 @@ Polls an SQS queue for S3 Put/Post/Copy events on a publicly available bucket an
 
 ### Requirements
 - You must have an s3 bucket that allows read to everyone.
-- You must setup your bucket to send PUT, Post, Copy and Complete Multipart Upload events to an SQS Queue
+- You must setup your bucket to send PUT, Post, Copy and Complete Multipart Upload events to an SQS Queue.
 - Your credentials profile must have access to poll the queue.
 - Your queue should have a policy to allow the bucket to send messages to it.
-- Optional - upload configuration file to bucket either accessible by credentials or public
+- You must have an Azure storage account, account key, and a container to uplaod files to.
+- Optional - upload configuration file to bucket either accessible by credentials or public.
 
 ### Example SQS Permission:
 ```
@@ -39,6 +40,8 @@ Where ACCOUNT_NUMBER is you account ID, QUEUE_NAME is the name of your Queue, an
 ```
 python queue2blob.py --config-file location/of/config.json
 ```
+
+
 
 ### Sample config file format
 ```
