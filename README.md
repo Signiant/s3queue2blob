@@ -7,6 +7,7 @@ Polls an SQS queue for S3 Put/Post/Copy events on a publicly available bucket an
 - You must setup your bucket to send PUT, Post, Copy and Complete Multipart Upload events to an SQS Queue
 - Your credentials profile must have access to poll the queue.
 - Your queue should have a policy to allow the bucket to send messages to it.
+- Optional - upload configuration file to bucket either accessible by credentials or public
 
 ### Example SQS Permission:
 ```
