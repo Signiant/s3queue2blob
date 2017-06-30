@@ -41,13 +41,17 @@ def parse_config_file(config_file):
             print(e)
             sys.exit(1)
 
+        if os.environ.get('STORAGE_KEY'):
+            key = os.environ.get('STORAGE_KEY')
+        else:
+            key = config['STORAGE_KEY']
         queue = config['QUEUE']
         region = config['REGION']
         s3_region = config['S3REGION']
         storage_account = config['STORAGE_ACCOUNT']
         container = config['CONTAINER']
-        logger.debug('Values : %s,%s,%s,%s',queue,region,storage_account,container)
-        return queue, region, s3_region, profile, storage_account, container
+        logger.debug('Values : %s,%s,%s,%s,%s',queue,region,storage_account,container,key)
+        return queue, region, s3_region, profile, storage_account, container, key
 
 
 def init_blob_service(storage_account,region,profile,key):
@@ -172,9 +176,9 @@ if __name__ == "__main__":
     if args.debug:
         logger.setLevel(logging.DEBUG)
     if args.config_file:
-        queue_name, region, s3_region, profile, storage_account, container  = parse_config_file(args.config_file)
+        queue_name, region, s3_region, profile, storage_account, container, key  = parse_config_file(args.config_file)
     elif os.environ.get('CONFIG_FILE') != 'None':
-        queue_name, region, s3_region, profile, storage_account, container  = parse_config_file(os.environ.get('CONFIG_FILE'))
+        queue_name, region, s3_region, profile, storage_account, container, key  = parse_config_file(os.environ.get('CONFIG_FILE'))
     else:
         queue_name = args.queue_name
         region = args.region
@@ -184,8 +188,6 @@ if __name__ == "__main__":
         container= args.container
     if args.storage_key:
         key = args.storage_key
-    else:
-        key = "None"
 
     if not init_blob_service(storage_account,region,profile,key):
         sys.exit(1)
