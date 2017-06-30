@@ -53,12 +53,8 @@ def parse_config_file(config_file):
 def init_blob_service(storage_account,region,profile,key):
     global blob_service
     global logger
-    storage_key = "None"
-    #get key
-        storage_key = key
-
     try:
-        blob_service = BlockBlobService(account_name=storage_account, account_key=storage_key)
+        blob_service = BlockBlobService(account_name=storage_account, account_key=key)
     except Exception as e:
         logger.error("ERROR: Could connect to Azure Storage: %s", str(e))
         return False
