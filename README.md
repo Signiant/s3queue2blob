@@ -1,6 +1,6 @@
 # s3queue2blob
 
-Polls an SQS queue for S3 Put/Post/Copy events on a publicly available bucket and replicates to Azure blob storage with an azure pull.
+Polls an SQS queue for S3 Put/Post/Copy events on a publicly available bucket and replicates files listed in those events to Azure blob storage with an azure pull.
 
 ### Requirements
 - You must have an s3 bucket that allows read to everyone.
