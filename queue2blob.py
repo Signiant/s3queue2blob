@@ -5,6 +5,7 @@ import boto3
 import json
 import time
 import logging
+import gc
 from azure.storage.blob import BlockBlobService
 
 WAIT_TIME=60
@@ -201,5 +202,6 @@ if __name__ == "__main__":
                     logger.error("Could not push success to Cloudwatch")
         else:
             logger.info('No messages processed , completed run')
-
+        del result
+        gc.collect()
         time.sleep(WAIT_TIME)
