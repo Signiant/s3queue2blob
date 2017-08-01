@@ -177,7 +177,7 @@ if __name__ == "__main__":
         logger.setLevel(logging.DEBUG)
     if args.config_file:
         queue_name, region, s3_region, profile, storage_account, container, key  = parse_config_file(args.config_file)
-    elif os.environ.get('CONFIG_FILE') != 'None':
+    elif os.environ.get('CONFIG_FILE') != None:
         queue_name, region, s3_region, profile, storage_account, container, key  = parse_config_file(os.environ.get('CONFIG_FILE'))
     else:
         queue_name = args.queue_name
